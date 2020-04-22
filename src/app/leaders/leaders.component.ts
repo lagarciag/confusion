@@ -1,15 +1,16 @@
 import { Component, OnInit } from "@angular/core";
 import { Leader } from "../shared/leader";
-import { LeaderService } from "../services/leader.service";
+import { DishService } from "../services/dish.service";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
+import { LeaderService } from "../services/leader.service";
 
 @Component({
-    selector: "app-about",
-    templateUrl: "./about.component.html",
-    styleUrls: ["./about.component.css"],
+    selector: "app-leaders",
+    templateUrl: "./leaders.component.html",
+    styleUrls: ["./leaders.component.css"],
 })
-export class AboutComponent implements OnInit {
+export class LeadersComponent implements OnInit {
     leaders: Leader[];
 
     constructor(private leaderservice: LeaderService, private route: ActivatedRoute, private location: Location) {}

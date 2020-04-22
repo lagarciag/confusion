@@ -28,6 +28,7 @@ import { DishService } from "./services/dish.service";
 // internal modules
 import { AppRoutingModule } from "./app-routing/app-routing.module";
 import { PromotionService } from "./services/promotion.service";
+import { LeadersComponent } from "./leaders/leaders.component";
 
 @NgModule({
     declarations: [
@@ -39,6 +40,7 @@ import { PromotionService } from "./services/promotion.service";
         HomeComponent,
         AboutComponent,
         ContactComponent,
+        LeadersComponent,
     ],
     imports: [
         BrowserModule,
