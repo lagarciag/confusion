@@ -18,3 +18,7 @@ $background-moredark: #4527A0;
 .active {
     background: $background-moredark;
 }
+
+.spacer {
+  flex: 1 1 auto;
+}

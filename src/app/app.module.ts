@@ -11,6 +11,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { MatDialogModule } from "@angular/material/dialog";
 
 // internal components
 import { AppComponent } from "./app.component";
@@ -21,6 +22,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 import { ContactComponent } from "./contact/contact.component";
+import { LoginComponent } from "./login/login.component";
 
 // internal services components
 import { DishService } from "./services/dish.service";
@@ -28,7 +30,10 @@ import { DishService } from "./services/dish.service";
 // internal modules
 import { AppRoutingModule } from "./app-routing/app-routing.module";
 import { PromotionService } from "./services/promotion.service";
-import { LeadersComponent } from "./leaders/leaders.component";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatCheckbox, MatCheckboxModule } from "@angular/material/checkbox";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -40,7 +45,7 @@ import { LeadersComponent } from "./leaders/leaders.component";
         HomeComponent,
         AboutComponent,
         ContactComponent,
-        LeadersComponent,
+        LoginComponent,
     ],
     imports: [
         BrowserModule,
@@ -53,8 +58,14 @@ import { LeadersComponent } from "./leaders/leaders.component";
         MatButtonModule,
         FontAwesomeModule,
         AppRoutingModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatCheckboxModule,
+        FormsModule,
     ],
     providers: [DishService, PromotionService],
     bootstrap: [AppComponent],
+    entryComponents: [LoginComponent],
 })
 export class AppModule {}
