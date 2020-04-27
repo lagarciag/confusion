@@ -57,7 +57,7 @@
         </mat-card>
     </div>
 
-    <div fxFlex>
+    <div fxFlex *ngIf="leaders">
         <mat-card>
             <mat-card-header>
                 <mat-card-title-group>
@@ -76,5 +76,9 @@
                 </mat-list-item>
             </mat-list>
         </mat-card>
+    </div>
+    <div [hidden]="leaders">
+        <mat-spinner></mat-spinner>
+        <h4>Loading . . . Please Wait</h4>
     </div>
 </div>
