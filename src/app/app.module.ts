@@ -38,6 +38,8 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSliderModule } from "@angular/material/slider";
+import { HttpClientModule } from "@angular/common/http";
+import { baseURL } from "./shared/baseURL";
 
 @NgModule({
     declarations: [
@@ -72,8 +74,9 @@ import { MatSliderModule } from "@angular/material/slider";
         MatSlideToggleModule,
         MatProgressSpinnerModule,
         MatSliderModule,
+        HttpClientModule,
     ],
-    providers: [DishService, PromotionService],
+    providers: [DishService, PromotionService, { provide: "BASE_URL", useValue: baseURL }],
     bootstrap: [AppComponent],
     entryComponents: [LoginComponent],
 })
