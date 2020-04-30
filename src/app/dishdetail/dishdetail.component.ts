@@ -19,7 +19,7 @@ export class DishdetailComponent implements OnInit {
     prev: string;
     next: string;
     errMess: string;
-
+    dishcopy: Dish;
     dish: Dish;
     previewOn = false;
     commentForm: FormGroup;
@@ -61,7 +61,7 @@ export class DishdetailComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private dishservice: DishService,
+        private dishService: DishService,
         private route: ActivatedRoute,
         private location: Location,
         @Inject("BASE_URL") public baseURL
@@ -70,13 +70,15 @@ export class DishdetailComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.dishservice.getDishIds().subscribe(
+        this.dishService.getDishIds().subscribe(
             (dishIds) => (this.dishIds = dishIds),
             (errmess) => (this.errMess = errmess as any)
         );
-        this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params["id"]))).subscribe(
+
+        this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params["id"]))).subscribe(
             (dish) => {
                 this.dish = dish;
+                this.dishcopy = dish;
                 this.setPrevNext(dish.id);
             },
             (errmess) => (this.errMess = errmess as any)
@@ -101,10 +103,23 @@ export class DishdetailComponent implements OnInit {
     onSubmit() {
         this.previewOn = false;
         this.dishComment.date = new Date().toISOString();
-        this.dish.comments.push(Object.assign({}, this.dishComment as DishComment));
-        console.log("-->", this.dishComment);
+
         this.comment = this.commentForm.value;
         console.log(this.comment);
+
+        this.dishcopy.comments.push(this.dishComment);
+        this.dishService.putDish(this.dishcopy).subscribe(
+            (dish) => {
+                this.dish = dish;
+                this.dishcopy = dish;
+            },
+            (errmess) => {
+                this.dish = null;
+                this.dishcopy = null;
+                this.errMess = errmess as any;
+            }
+        );
+
         this.commentForm.reset({
             rating: 5,
             comment: "",
