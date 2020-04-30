@@ -17,6 +17,8 @@ export class DishService {
     }
 
     getDish(id: number): Observable<Dish> {
+        const localUrl = baseURL + "dishes/" + id;
+        console.log("get dish: ", localUrl);
         return this.http.get<Dish>(baseURL + "dishes/" + id).pipe(catchError(this.processHTTPMsgService.handleError));
     }
 

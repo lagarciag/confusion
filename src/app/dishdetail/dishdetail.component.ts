@@ -7,14 +7,35 @@ import { switchMap } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Feedback } from "../shared/feedback";
 import { DishComment } from "../shared/dishComment";
+import { animate, state, style, transition, trigger } from "@angular/animations";
 
 @Component({
     selector: "app-dishdetail",
     templateUrl: "./dishdetail.component.html",
     styleUrls: ["./dishdetail.component.css"],
+    animations: [
+        trigger("visibility", [
+            state(
+                "shown",
+                style({
+                    transform: "scale(1.0)",
+                    opacity: 1,
+                })
+            ),
+            state(
+                "hidden",
+                style({
+                    transform: "scale(0.5)",
+                    opacity: 0,
+                })
+            ),
+            transition("* => *", animate("0.5s ease-in-out")),
+        ]),
+    ],
 })
 export class DishdetailComponent implements OnInit {
     @ViewChild("fform") commentFormDirective;
+    visibility = "shown";
     dishIds: string[];
     prev: string;
     next: string;
@@ -75,17 +96,43 @@ export class DishdetailComponent implements OnInit {
             (errmess) => (this.errMess = errmess as any)
         );
 
-        this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params["id"]))).subscribe(
-            (dish) => {
-                this.dish = dish;
-                this.dishcopy = dish;
-                this.setPrevNext(dish.id);
-            },
-            (errmess) => (this.errMess = errmess as any)
-        );
+        this.route.params
+            .pipe(
+                switchMap((params: Params) => {
+                    this.visibility = "hidden";
+                    return this.dishService.getDish(params["id"]);
+                })
+            )
+            .subscribe(
+                (dish) => {
+                    this.dish = dish;
+                    this.dishcopy = dish;
+                    this.setPrevNext(dish.id);
+                    this.visibility = "shown";
+                },
+                (errmess) => (this.errMess = errmess as any)
+            );
+
+        // this.route.params
+        //     .pipe(
+        //         switchMap((params: Params) => {
+        //             this.visibility = "hidden";
+        //             return this.dishservice.getDish(+params["id"]);
+        //         })
+        //     )
+        //     .subscribe(
+        //         (dish) => {
+        //             this.dish = dish;
+        //             this.dishcopy = dish;
+        //             this.setPrevNext(dish.id);
+        //             this.visibility = "shown";
+        //         },
+        //         (errmess) => (this.errMess = errmess as any)
+        //     );
     }
 
     setPrevNext(dishId: string) {
+        console.log("index is: ", dishId, this.dishIds);
         const index = this.dishIds.indexOf(dishId);
         this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
         this.next = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
