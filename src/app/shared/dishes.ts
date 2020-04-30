@@ -22,8 +22,7 @@ export const DISHES: Dish[] = [
             },
             {
                 rating: 4,
-                comment:
-                    "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
+                comment: "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
                 author: "Paul McVites",
                 date: "2014-09-05T17:57:28.556094Z",
             },
@@ -55,8 +54,7 @@ export const DISHES: Dish[] = [
         featured: false,
         label: "",
         price: "1.99",
-        description:
-            "Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce",
+        description: "Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce",
         comments: [
             {
                 rating: 5,
@@ -66,8 +64,7 @@ export const DISHES: Dish[] = [
             },
             {
                 rating: 4,
-                comment:
-                    "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
+                comment: "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
                 author: "Paul McVites",
                 date: "2014-09-05T17:57:28.556094Z",
             },
@@ -99,8 +96,7 @@ export const DISHES: Dish[] = [
         featured: false,
         label: "New",
         price: "1.99",
-        description:
-            "A quintessential ConFusion experience, is it a vada or is it a donut?",
+        description: "A quintessential ConFusion experience, is it a vada or is it a donut?",
         comments: [
             {
                 rating: 5,
@@ -110,8 +106,7 @@ export const DISHES: Dish[] = [
             },
             {
                 rating: 4,
-                comment:
-                    "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
+                comment: "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
                 author: "Paul McVites",
                 date: "2014-09-05T17:57:28.556094Z",
             },
@@ -143,8 +138,7 @@ export const DISHES: Dish[] = [
         featured: false,
         label: "",
         price: "2.99",
-        description:
-            "A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms",
+        description: "A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms",
         comments: [
             {
                 rating: 5,
@@ -154,8 +148,7 @@ export const DISHES: Dish[] = [
             },
             {
                 rating: 4,
-                comment:
-                    "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
+                comment: "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
                 author: "Paul McVites",
                 date: "2014-09-05T17:57:28.556094Z",
             },

@@ -9,10 +9,12 @@ import { DishService } from "../services/dish.service";
 })
 export class MenuComponent implements OnInit {
     dishes: Dish[];
-    selectedDish: Dish;
-
+    errMess: string;
     ngOnInit(): void {
-        this.dishService.getDishes().subscribe((dishes) => (this.dishes = dishes));
+        this.dishService.getDishes().subscribe(
+            (dishes) => (this.dishes = dishes),
+            (errmess) => (this.errMess = errmess as any)
+        );
     }
 
     constructor(private dishService: DishService, @Inject("BASE_URL") public baseURL) {}

@@ -53,8 +53,12 @@
             <p>{{ leader.description }}</p>
         </mat-card-content>
     </mat-card>
-    <mat-card *ngIf="!leader" fxFlex>
+    <div [hidden]="dish || dishErrMess" fxFlex>
         <h4>Loading . . . Please Wait</h4>
         <mat-spinner></mat-spinner>
-    </mat-card>
+    </div>
+    <div fxFlex *ngIf="dishErrMess">
+        <h2>Error</h2>
+        <h4>{{ dishErrMess }}</h4>
+    </div>
 </div>
