@@ -4,11 +4,13 @@ import { faEnvelopeOpen } from "@fortawesome/free-regular-svg-icons";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Feedback, ContactType } from "../shared/feedback";
+import { expand, flyInOut } from "../animations/app.animations";
 
 @Component({
     selector: "app-contact",
     templateUrl: "./contact.component.html",
     styleUrls: ["./contact.component.scss"],
+    animations: [flyInOut(), expand()],
 })
 export class ContactComponent implements OnInit {
     @ViewChild("fform") feedbackFormDirective;

@@ -5,33 +5,13 @@ import { Params, ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { switchMap } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Feedback } from "../shared/feedback";
-import { DishComment } from "../shared/dishComment";
-import { animate, state, style, transition, trigger } from "@angular/animations";
+import { expand, flyInOut, visibility } from "../animations/app.animations";
 
 @Component({
     selector: "app-dishdetail",
     templateUrl: "./dishdetail.component.html",
     styleUrls: ["./dishdetail.component.css"],
-    animations: [
-        trigger("visibility", [
-            state(
-                "shown",
-                style({
-                    transform: "scale(1.0)",
-                    opacity: 1,
-                })
-            ),
-            state(
-                "hidden",
-                style({
-                    transform: "scale(0.5)",
-                    opacity: 0,
-                })
-            ),
-            transition("* => *", animate("0.5s ease-in-out")),
-        ]),
-    ],
+    animations: [visibility(), flyInOut(), expand()],
 })
 export class DishdetailComponent implements OnInit {
     @ViewChild("fform") commentFormDirective;
