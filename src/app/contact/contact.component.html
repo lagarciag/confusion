@@ -32,7 +32,22 @@
             </div>
         </div>
     </div>
-    <div fxFlex fxFlexOffset="20px" class="form-size">
+    <div fxFlex [@visibility]="spinnerVisibility">
+        <mat-spinner></mat-spinner>
+        <h4>Loading . . . Please Wait</h4>
+    </div>
+    <div fxFlex *ngIf="feedbackResponse">
+        <h1>Your Feedback</h1>
+        <mat-list-item> First Name: {{ feedbackResponse.firstname }} </mat-list-item>
+        <mat-list-item> Last Name : {{ feedbackResponse.lastname }} </mat-list-item>
+        <mat-list-item> tel Number: {{ feedbackResponse.telnum }} </mat-list-item>
+        <mat-list-item> Email : {{ feedbackResponse.email }} </mat-list-item>
+        <mat-list-item> Contact : {{ feedbackResponse.agree }} </mat-list-item>
+        <mat-list-item> How? : {{ feedbackResponse.contacttype }} </mat-list-item>
+        <mat-list-item> Feedback : {{ feedbackResponse.message }} </mat-list-item>
+    </div>
+
+    <div fxFlex fxFlexOffset="20px" class="form-size" [@visibility]="formVisibility">
         <h3>Send us your Feedback</h3>
         <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
 

@@ -1,23 +1,25 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { faSkype } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelopeOpen } from "@fortawesome/free-regular-svg-icons";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Feedback, ContactType } from "../shared/feedback";
-import { expand, flyInOut } from "../animations/app.animations";
+import { expand, flyInOut, visibility } from "../animations/app.animations";
+import { FeedbackService } from "../services/feedback.service";
 
 @Component({
     selector: "app-contact",
     templateUrl: "./contact.component.html",
     styleUrls: ["./contact.component.scss"],
-    animations: [flyInOut(), expand()],
+    animations: [visibility(), flyInOut(), expand()],
 })
 export class ContactComponent implements OnInit {
     @ViewChild("fform") feedbackFormDirective;
+    spinnerVisibility = "hidden";
+    responseVisibility = "hidden";
+    formVisibility = "shown";
     feedbackForm: FormGroup;
     feedback: Feedback;
+    feedbackResponse: Feedback;
     contactType = ContactType;
-
+    errMess: string;
     formErrors = {
         firstname: "",
         lastname: "",
@@ -46,7 +48,7 @@ export class ContactComponent implements OnInit {
         },
     };
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private feedbackService: FeedbackService) {
         this.createForm();
     }
 
@@ -65,9 +67,38 @@ export class ContactComponent implements OnInit {
         this.feedbackForm.valueChanges.subscribe((data) => this.onValueChanged(data));
     }
 
+    setFeedback(): Promise<Feedback> {
+        const feedbackResponse = this.feedback;
+        console.log("inside setFeeback");
+        return new Promise((resolve) => {
+            setTimeout(() => resolve(feedbackResponse), 5000);
+        });
+    }
+
+    hideFeedbackReponse() {
+        console.log("hideFeedbackResponse");
+        this.feedbackResponse = null;
+        this.formVisibility = "shown";
+    }
+
     onSubmit() {
         this.feedback = this.feedbackForm.value;
         console.log(this.feedback);
+        this.formVisibility = "hidden";
+        this.spinnerVisibility = "shown";
+        this.feedbackService.submitFeedback(this.feedback).subscribe(
+            (feedback) => {
+                this.spinnerVisibility = "hidden";
+                this.feedbackResponse = feedback;
+                this.setFeedback().then((feedbackResponse) => this.hideFeedbackReponse());
+                console.log("done feedback");
+            },
+            (errmess) => {
+                this.feedback = null;
+                this.errMess = errmess as any;
+            }
+        );
+
         this.feedbackForm.reset({
             firstname: "",
             lastname: "",

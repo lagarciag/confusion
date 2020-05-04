@@ -80,6 +80,7 @@ export class DishdetailComponent implements OnInit {
             .pipe(
                 switchMap((params: Params) => {
                     this.visibility = "hidden";
+
                     return this.dishService.getDish(params["id"]);
                 })
             )
@@ -172,7 +173,6 @@ export class DishdetailComponent implements OnInit {
                 // clear previous error message (if any)
                 this.formErrors[field] = "";
                 this.formFieldIsSet[field] = false;
-                // this.dishComment[field] = "";
 
                 const control = form.get(field);
                 if (control && control.dirty && !control.valid) {
